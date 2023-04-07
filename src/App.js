@@ -1,25 +1,42 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from 'react';
+import photo1 from './assets/photo1.png';
+import photo2 from './assets/photo2.png';
+import photo3 from './assets/photo3.png';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+const Slider = () => {
+    const photos = [
+        {
+            src: photo1,
+            caption: 'Фото 1',
+        },
+        {
+            src: photo2,
+            caption: 'Фото 2',
+        },
+        {
+            src: photo3,
+            caption: 'Фото 3',
+        },
+    ];
 
-export default App;
+    const [currentIndex, setCurrentIndex] = useState(0);
+
+    const handlePrev = () => {
+        setCurrentIndex(currentIndex === 0 ? photos.length - 1 : currentIndex - 1);
+    };
+
+    const handleNext = () => {
+        setCurrentIndex(currentIndex === photos.length - 1 ? 0 : currentIndex + 1);
+    };
+
+    return (
+        <div>
+            <img src={photos[currentIndex].src} alt={photos[currentIndex].caption} />
+            <p>{photos[currentIndex].caption}</p>
+            <button onClick={handlePrev}>Назад</button>
+            <button onClick={handleNext}>Далее</button>
+        </div>
+    );
+};
+
+export default Slider;
